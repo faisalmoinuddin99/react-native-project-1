@@ -10,6 +10,10 @@ export default function App() {
     setName(uppercaseName);
   };
 
+  const inputHandler = (event) => {
+    setAge(event);
+  };
+
   return (
     <View style={styles.container}>
       <Text>Enter your name:</Text>
@@ -24,9 +28,7 @@ export default function App() {
         style={styles.input}
         keyboardType="number-pad"
         placeholder="e.g. 24 years"
-        onChangeText={(e) => {
-          setAge(e);
-        }}
+        onChangeText={inputHandler}
       />
       <Text>
         name:{name} Length: {name.length} words: {name.split(" ").length - 1}
