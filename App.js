@@ -1,24 +1,34 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
+import React, { useState } from "react";
 
 export default function App() {
+  const [name, setName] = useState("Faisal");
+  const [counter, setcounter] = useState(0);
+  const [person, setPerson] = useState({ name: "mario", age: 40 });
+
+  const clickHandler = () => {
+    if (name === "Faisal") {
+      setName("Suleman");
+      setcounter(counter + 1);
+    } else if (name === "Suleman") {
+      setName("Faisal");
+      setcounter(counter + 1);
+    }
+
+    if (counter === 40) {
+      setcounter(0);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.textStyle}>Hello, Faisal!! </Text>
-      </View>
-      <View style={styles.body}>
-        <Text>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus,
-          iusto.
-        </Text>
-        <Text>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus,
-          iusto.
-        </Text>
-        <Text>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus,
-          iusto.
-        </Text>
+      <Text>My name is {name}</Text>
+      <Text>Counter: {counter}</Text>
+      <Text>
+        His name is {person.name} and he is {person.age} year youngs
+      </Text>
+      <View style={styles.buttonContainer}>
+        <Button title="update state" onPress={clickHandler} />
       </View>
     </View>
   );
@@ -27,21 +37,11 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "wheat",
     alignItems: "center",
+    backgroundColor: "wheat",
     justifyContent: "center",
   },
-  header: {
-    backgroundColor: "pink",
-    padding: 20,
-  },
-  textStyle: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  body: {
-    backgroundColor: "yellow",
-    padding: 30,
-    marginTop: 10,
+  buttonContainer: {
+    marginTop: 20,
   },
 });
