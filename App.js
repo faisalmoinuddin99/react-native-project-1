@@ -1,34 +1,39 @@
-import { View, Text, StyleSheet, Button } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, Button, TextInput } from "react-native";
+import React, { useState, useReducer } from "react";
 
 export default function App() {
   const [name, setName] = useState("Faisal");
-  const [counter, setcounter] = useState(0);
-  const [person, setPerson] = useState({ name: "mario", age: 40 });
+  const [age, setAge] = useState(0);
 
   const clickHandler = () => {
-    if (name === "Faisal") {
-      setName("Suleman");
-      setcounter(counter + 1);
-    } else if (name === "Suleman") {
-      setName("Faisal");
-      setcounter(counter + 1);
-    }
-
-    if (counter === 40) {
-      setcounter(0);
-    }
+    let uppercaseName = name.toUpperCase();
+    setName(uppercaseName);
   };
 
   return (
     <View style={styles.container}>
-      <Text>My name is {name}</Text>
-      <Text>Counter: {counter}</Text>
+      <Text>Enter your name:</Text>
+      <TextInput
+        multiline
+        style={styles.input}
+        placeholder="e.g. Jhon doe"
+        onChangeText={(val) => setName(val)}
+      />
+      <Text>Enter your age:</Text>
+      <TextInput
+        style={styles.input}
+        keyboardType="number-pad"
+        placeholder="e.g. 24 years"
+        onChangeText={(e) => {
+          setAge(e);
+        }}
+      />
       <Text>
-        His name is {person.name} and he is {person.age} year youngs
+        name:{name} Length: {name.length} words: {name.split(" ").length - 1}
       </Text>
+      <Text>age:{age}</Text>
       <View style={styles.buttonContainer}>
-        <Button title="update state" onPress={clickHandler} />
+        <Button title="Click to Uppercase" onPress={clickHandler} />
       </View>
     </View>
   );
@@ -43,5 +48,12 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 200,
   },
 });
