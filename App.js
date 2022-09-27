@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 
 const App = () => {
@@ -36,6 +43,12 @@ const App = () => {
       id: 8,
     },
   ]);
+  const pressHandler = (id) => {
+    console.log(id);
+    setCategory((prevCategory) => {
+      return prevCategory.filter((category) => category.id != id);
+    });
+  };
   return (
     <View style={styles.container}>
       <FlatList
@@ -43,19 +56,11 @@ const App = () => {
         keyExtractor={(item) => item.id}
         data={category}
         renderItem={({ item }) => (
-          <Text style={styles.item}>{item.categoryName}</Text>
+          <TouchableOpacity onPress={() => pressHandler(item.id)}>
+            <Text style={styles.item}>{item.categoryName}</Text>
+          </TouchableOpacity>
         )}
       />
-
-      {/* <ScrollView>
-        {category.map((item) => {
-          return (
-            <View key={item.key}>
-              <Text style={styles.item}>{item.categoryName}</Text>
-            </View>
-          );
-        })}
-      </ScrollView> */}
     </View>
   );
 };
