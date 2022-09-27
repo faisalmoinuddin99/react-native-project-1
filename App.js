@@ -1,61 +1,70 @@
-import { View, Text, StyleSheet, Button, TextInput } from "react-native";
-import React, { useState, useReducer } from "react";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useState } from "react";
 
-export default function App() {
-  const [name, setName] = useState("Faisal");
-  const [age, setAge] = useState(0);
-
-  const clickHandler = () => {
-    let uppercaseName = name.toUpperCase();
-    setName(uppercaseName);
-  };
-
-  const inputHandler = (event) => {
-    setAge(event);
-  };
-
+const App = () => {
+  const [category, setCategory] = useState([
+    {
+      categoryName: "sports",
+      key: 1,
+    },
+    {
+      categoryName: "festival",
+      key: 2,
+    },
+    {
+      categoryName: "party",
+      key: 3,
+    },
+    {
+      categoryName: "official",
+      key: 4,
+    },
+    {
+      categoryName: "casual",
+      key: 5,
+    },
+    {
+      categoryName: "beaches",
+      key: 6,
+    },
+    {
+      categoryName: "outing",
+      key: 7,
+    },
+    {
+      categoryName: "date",
+      key: 8,
+    },
+  ]);
   return (
     <View style={styles.container}>
-      <Text>Enter your name:</Text>
-      <TextInput
-        multiline
-        style={styles.input}
-        placeholder="e.g. Jhon doe"
-        onChangeText={(val) => setName(val)}
-      />
-      <Text>Enter your age:</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="number-pad"
-        placeholder="e.g. 24 years"
-        onChangeText={inputHandler}
-      />
-      <Text>
-        name:{name} Length: {name.length} words: {name.split(" ").length - 1}
-      </Text>
-      <Text>age:{age}</Text>
-      <View style={styles.buttonContainer}>
-        <Button title="Click to Uppercase" onPress={clickHandler} />
-      </View>
+      <ScrollView>
+        {category.map((item) => {
+          return (
+            <View key={item.key}>
+              <Text style={styles.item}>{item.categoryName}</Text>
+            </View>
+          );
+        })}
+      </ScrollView>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    // justifyContent: "center",
     backgroundColor: "wheat",
-    justifyContent: "center",
+    paddingTop: 40,
+    paddingHorizontal: 20,
   },
-  buttonContainer: {
-    marginTop: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#777",
-    padding: 8,
-    margin: 10,
-    width: 200,
+  item: {
+    marginTop: 24,
+    padding: 30,
+    backgroundColor: "pink",
+    fontSize: 24,
   },
 });
+
+export default App;
