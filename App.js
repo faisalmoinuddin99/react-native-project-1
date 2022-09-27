@@ -1,44 +1,53 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, FlatList } from "react-native";
 import React, { useState } from "react";
 
 const App = () => {
   const [category, setCategory] = useState([
     {
       categoryName: "sports",
-      key: 1,
+      id: 1,
     },
     {
       categoryName: "festival",
-      key: 2,
+      id: 2,
     },
     {
       categoryName: "party",
-      key: 3,
+      id: 3,
     },
     {
       categoryName: "official",
-      key: 4,
+      id: 4,
     },
     {
       categoryName: "casual",
-      key: 5,
+      id: 5,
     },
     {
       categoryName: "beaches",
-      key: 6,
+      id: 6,
     },
     {
       categoryName: "outing",
-      key: 7,
+      id: 7,
     },
     {
       categoryName: "date",
-      key: 8,
+      id: 8,
     },
   ]);
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <FlatList
+        numColumns={2}
+        keyExtractor={(item) => item.id}
+        data={category}
+        renderItem={({ item }) => (
+          <Text style={styles.item}>{item.categoryName}</Text>
+        )}
+      />
+
+      {/* <ScrollView>
         {category.map((item) => {
           return (
             <View key={item.key}>
@@ -46,7 +55,7 @@ const App = () => {
             </View>
           );
         })}
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
@@ -64,6 +73,8 @@ const styles = StyleSheet.create({
     padding: 30,
     backgroundColor: "pink",
     fontSize: 24,
+    marginHorizontal: 10,
+    marginTop: 24,
   },
 });
 
